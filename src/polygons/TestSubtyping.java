@@ -40,25 +40,25 @@ public class TestSubtyping {
         //    Will they work? Will they lead to a static type error?
         //    Will they cause a dynamic (runtime) error (i.e. an exception)?
         //    If they cause an error, why?
-//        polyArray[0] = pol;                   // OK/Static error/Dynamic error
-//        polyArray[1] = tri;                   // ____
-//        triArray[0]  = pol;                   // ____
-//        triArray[1]  = tri;                   // ____
-//        triArray[2]  = (Triangle) pol;        // ____
+       polyArray[0] = pol;                   // OK
+       polyArray[1] = tri;                   // OK
+//        triArray[0]  = pol;                   // Static error
+       triArray[1]  = tri;                   // OK
+       triArray[2]  = (Triangle) pol;        // OK it is a triangle so it will not cause error. Bad to use cast thoo.
 //
-//        polyList.add(pol);                    // ____
-//        polyList.add(tri);                    // ____
-//        triList.add(pol);                     // ____
-//        triList.add(tri);                     // ____
-//        triList.add((Triangle) pol);          // ____
-//        triList.add((Triangle) obj);          // ____
+       polyList.add(pol);                    // OK dynamiskt är det en triangel så det funkar. Kolla nedan. Kan lägga till subklasser. 
+       polyList.add(tri);                    // OK kan lägga till subklasser i en lista med superklasser
+//        triList.add(pol);                     // Static error. Kan inte lägga till superklass i en lista med subklasser
+       triList.add(tri);                     // OK
+       triList.add((Triangle) pol);          // OK
+//        triList.add((Triangle) obj);          // Dynamic error. Kan inte casta objektet till en triangel
 //
-//        coPolyList.add(pol);                  // ____
-//        coPolyList.add(tri);                  // ____
-//        coPolyList.add(obj);
-//        contraPolyList.add(pol);              // ____
-//        contraPolyList.add(tri);              // ____
-//        contraPolyList.add(obj);              // ____
+//        coPolyList.add(pol);                  // Listan kan faktiskt vara begränsad till Triangle, och att lägga till en Pol skulle bryta mot typsäkerheten.
+//        coPolyList.add(tri);                  // Listan kan faktiskt vara begränsad till Square, och att lägga till en Tri skulle bryta mot typsäkerheten.
+//        coPolyList.add(obj);                  // Listan kan faktiskt vara begränsad till Triangle, och att lägga till en obj skulle bryta mot typsäkerheten.
+       contraPolyList.add(pol);              // OK
+       contraPolyList.add(tri);              // OK. Fattar inte varför det funkar.
+       contraPolyList.add(obj);              // Static error. Objekt är superklass, men det är för vagt. Har ingen gemensam funktionallitet med Polygon. 
 
         // TODO: Step 1b: Predict what the results of these lines will be.
         //    Will they work? Will they lead to a static type error?
